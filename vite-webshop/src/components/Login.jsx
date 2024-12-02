@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
+
 import "./Login.css"
 
 export default function Login () {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+    const handleLogin = () => {
         fetch('https://fakestoreapi.com/auth/login', {
             method: 'POST',
             headers: {
@@ -25,15 +27,14 @@ export default function Login () {
             .then((data) => {
               console.log(data);
 
-              if (data.token) {
-                localStorage.setItem("authToken", data.token);
+              if (data) {
                 navigate("/"); 
               }
             })
             .catch((err) => console.error("Error during login:", err));
         };
 
-    }
+    
 
     return (
         <>
@@ -41,13 +42,13 @@ export default function Login () {
           <form onSubmit={event => {
             event.preventDefault();
     
-            handleSignIn();
+            handleLogin();
           }}>
-            <input type="email" placeholder="email" value={email} onChange={event => setEmail(event.target.value)} />
+            <input type="text" placeholder="text" value={email} onChange={event => setEmail(event.target.value)} />
             <input type="password" placeholder="password" value={password} onChange={event => setPassword(event.target.value)} />
-            <button>sign in</button>
+            <button>Login</button>
           </form>
-          <button onClick={() => navigate('/signup')}>sign up</button>
+          <button onClick={() => navigate('/register')}>Register</button>
         </>
       )
-    }
+}

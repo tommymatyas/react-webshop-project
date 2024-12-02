@@ -9,7 +9,14 @@ export default function Products() {
 
   return (
     <>
-      {data && data.map(product => <Product key={product.id} id={product.id} title={product.title} price={product.price} category={product.category} description={product.description} image={product.image} />)}
+      {data && data.map(product => <Product 
+      key={product.id} 
+      id={product.id} 
+      title={product.title} 
+      price={product.price} 
+      category={product.category} 
+      description={product.description} 
+      image={product.image} />)}
     </>
   );
 }

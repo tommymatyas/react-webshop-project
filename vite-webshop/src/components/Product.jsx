@@ -4,9 +4,9 @@ export default function Product({ id, title, price, category, description, image
             <div>
                 <img src={image} width="200" height="200"/>
                 <h2>{title}</h2>
-                <h2>{price}</h2>
-                <h2>{description}</h2>
-                <h2>{title}</h2>
+                <h3>Price:{price}</h3>
+                <h4>Description{description}</h4>
+                
 
             
             
