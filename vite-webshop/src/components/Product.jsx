@@ -6,14 +6,8 @@ export default function Product({ id, title, price, category, description, image
                 <h2>{title}</h2>
                 <h3>Price:{price}</h3>
                 <h4>Description{description}</h4>
-                
+                <h4>Category: {category}</h4>
 
-            
-            
-            
-            
-            
-            
             </div>
             <button>Add to cart</button>
         </div>

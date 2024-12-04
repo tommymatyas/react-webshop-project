@@ -1,42 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState, useContext} from "react";
 import "./App.css";
 import Products from "./components/Products";
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Login from "./components/Login";
-import Register from "./components/Register";
+import { auth } from "./services/firebase.config";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./components/Auth";
 
 function App() {
-  const [users, setUsers] = useState ("")
-  const addUser = (newUser) => {
-    setUsers(prevUsers => [...prevUsers, newUser])
-  }
-
-  fetch('https://fakestoreapi.com/users')
-            .then(res =>res.json())
-            .then(users => setUsers(users))
+ 
+  const user = useContext(AuthContext);
+  const navigate = useNavigate();
+  
+  
+  useEffect(() => {
+    if (user === null) navigate('/signin')
+    }, [user, navigate])
   return (
-    <Router>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/login">Login</Link></li>
-        </ul>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Products />} />
-        <Route path="/about" element={<h2>about</h2>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register addUser={addUser}/>} />
-      </Routes>
-    </Router>
-          
-
-            
+    
+    
+    
+    <div className="app">
+            <h2>hello {user?.email}</h2>
+             <Products
+            />
+           <button onClick={() => auth.signOut()}>sign out</button>
+         </div>
   
   
-          );
+);
+
 }
 
 export default App;
