@@ -1,11 +1,13 @@
+import { useState } from "react";
+
 const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
   const [userDetails, setUserDetails] = useState({
     name: "",
-    email: user?.email || "", 
+    email: user?.email || "",
     address: "",
   });
 
-  const [orderPlaced, setOrderPlaced] = useState(false); 
+  const [orderPlaced, setOrderPlaced] = useState(false);
 
   const calculateTotal = () => {
     return cart
@@ -31,7 +33,7 @@ const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
     });
 
     onClearCart();
-    setOrderPlaced(true); 
+    setOrderPlaced(true);
   };
 
   if (orderPlaced) {
@@ -39,7 +41,10 @@ const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
       <div className="checkout">
         <h1>Order Placed Successfully!</h1>
         <p>Thank you for your order, {userDetails.name}!</p>
-        <button onClick={() => setIsCheckout(false)} className="back-to-cart-btn">
+        <button
+          onClick={() => setIsCheckout(false)}
+          className="back-to-cart-btn"
+        >
           Back to Products
         </button>
       </div>
@@ -63,7 +68,7 @@ const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
           name="email"
           placeholder="Email Address"
           value={userDetails.email}
-          onChange={handleInputChange} 
+          onChange={handleInputChange}
         />
         <textarea
           name="address"
@@ -103,7 +108,10 @@ const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
       </div>
 
       <div className="checkout-actions">
-        <button onClick={() => setIsCheckout(false)} className="back-to-cart-btn">
+        <button
+          onClick={() => setIsCheckout(false)}
+          className="back-to-cart-btn"
+        >
           Back to Cart
         </button>
         <button onClick={handlePlaceOrder} className="place-order-btn">
