@@ -1,0 +1,88 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e0f7fa; /* Light blue-green background */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Center the content */
+form,
+h2,
+button {
+  text-align: center;
+}
+
+/* Heading styles */
+h2 {
+  color: #00695c; /* Deep teal */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Form container */
+form {
+  background-color: #ffffff; /* White background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Input styles */
+form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #b2dfdb; /* Light teal border */
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Button styles */
+form button {
+  background-color: #00796b; /* Dark teal */
+  color: #ffffff; /* White text */
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px; /* Add spacing between buttons */
+}
+
+form button {
+  color: #ffffff; /* White text */
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px; /* Add spacing between buttons */
+}
+
+/* Specific styles for the sign-in button */
+.sign-in-button {
+  background-color: #00796b; /* Dark teal */
+}
+
+.sign-in-button:hover {
+  background-color: #004d40; /* Even darker teal */
+}
+
+/* Specific styles for the sign-up button */
+.sign-up-button {
+  background-color: #004e89; /* Dark blue */
+}
+
+.sign-up-button:hover {
+  background-color: #003060; /* Even darker blue */
+}

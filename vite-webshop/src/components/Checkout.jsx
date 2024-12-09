@@ -1,31 +1,43 @@
 import { useState } from "react";
 
-const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
+const Checkout = ({
+  cart = [],
+  onClearCart = () => {},
+  setIsCheckout = () => {},
+  user,
+}) => {
+  // State for user details and order placement status
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: user?.email || "",
     address: "",
   });
-
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  const calculateTotal = () => {
-    return cart
-      .reduce((total, item) => total + item.price * item.quantity, 0)
+  // Calculate the total price of items in the cart
+  const calculateTotal = () =>
+    cart
+      .reduce(
+        (total, item) => total + (item.price || 0) * (item.quantity || 1),
+        0
+      )
       .toFixed(2);
-  };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  // Handle input changes for user details
+  const handleInputChange = ({ target: { name, value } }) => {
     setUserDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
   };
 
+  // Handle order placement
   const handlePlaceOrder = () => {
-    if (!userDetails.name || !userDetails.email || !userDetails.address) {
+    const { name, email, address } = userDetails;
+
+    if (!name || !email || !address) {
       alert("Please fill out all the fields.");
       return;
     }
 
+    // Log the order details (this would be replaced with an API call in a real-world app)
     console.log("Order placed:", {
       userDetails,
       cart,
@@ -36,6 +48,7 @@ const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
     setOrderPlaced(true);
   };
 
+  // Render order success message
   if (orderPlaced) {
     return (
       <div className="checkout">
@@ -51,9 +64,12 @@ const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
     );
   }
 
+  // Render checkout form and cart summary
   return (
     <div className="checkout">
       <h1>Checkout</h1>
+
+      {/* User details form */}
       <div className="checkout-details">
         <h2>Your Details</h2>
         <input
@@ -78,6 +94,7 @@ const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
         ></textarea>
       </div>
 
+      {/* Cart summary */}
       <div className="checkout-cart">
         <h2>Your Cart</h2>
         {cart.length === 0 ? (
@@ -93,12 +110,12 @@ const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
               </tr>
             </thead>
             <tbody>
-              {cart.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.title}</td>
-                  <td>${item.price.toFixed(2)}</td>
-                  <td>{item.quantity}</td>
-                  <td>${(item.price * item.quantity).toFixed(2)}</td>
+              {cart.map(({ id, title, price = 0, quantity = 1 }) => (
+                <tr key={id}>
+                  <td>{title}</td>
+                  <td>${price.toFixed(2)}</td>
+                  <td>{quantity}</td>
+                  <td>${(price * quantity).toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
@@ -107,12 +124,13 @@ const Checkout = ({ cart = [], onClearCart, setIsCheckout, user }) => {
         <h3>Total: ${calculateTotal()}</h3>
       </div>
 
+      {/* Checkout actions */}
       <div className="checkout-actions">
         <button
           onClick={() => setIsCheckout(false)}
           className="back-to-cart-btn"
         >
-          Back to Cart
+          Back to Home Page
         </button>
         <button onClick={handlePlaceOrder} className="place-order-btn">
           Place Order

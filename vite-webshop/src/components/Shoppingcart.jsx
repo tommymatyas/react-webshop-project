@@ -1,18 +1,28 @@
-const ShoppingCart = ({ cart = [], onRemoveItem = () => {}, onClearCart = () => {} }) => {
-  const calculateTotal = () => {
-    return cart
-      .reduce((total, item) => total + (typeof item.price === "number" ? item.price : 0) * (item.quantity || 1), 0)
+const ShoppingCart = ({
+  cart = [],
+  onRemoveItem = () => {},
+  onClearCart = () => {},
+  onProceedToCheckout = () => {},
+}) => {
+  // Calculate the total price of items in the cart
+  const calculateTotal = () =>
+    cart
+      .reduce(
+        (total, item) => total + (item.price || 0) * (item.quantity || 1),
+        0
+      )
       .toFixed(2);
-  };
 
   return (
     <div className="shopping-cart">
       <h1>Shopping Cart</h1>
-      {}
+
+      {/* Display a message if the cart is empty */}
       {cart.length === 0 ? (
         <p>Your cart is empty. Add some items to get started!</p>
       ) : (
         <div>
+          {/* Table to display cart items */}
           <table>
             <thead>
               <tr>
@@ -25,38 +35,50 @@ const ShoppingCart = ({ cart = [], onRemoveItem = () => {}, onClearCart = () => 
               </tr>
             </thead>
             <tbody>
-              {}
-              {cart.map((item) => {
-                const price = typeof item.price === "number" ? item.price : 0; 
-                const subtotal = price * (item.quantity || 1); 
-
-                return (
-                  <tr key={item.id}>
-                    <td>
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        style={{ width: "50px", height: "50px" }}
-                      />
-                    </td>
-                    <td>{item.title}</td>
-                    <td>${price.toFixed(2)}</td>
-                    <td>{item.quantity || 1}</td>
-                    <td>${subtotal.toFixed(2)}</td>
-                    <td>
-                      <button onClick={() => onRemoveItem(item.id)}>Remove</button>
-                    </td>
-                  </tr>
-                );
-              })}
+              {cart.map(({ id, image, title, price = 0, quantity = 1 }) => (
+                <tr key={id}>
+                  <td>
+                    <img
+                      src={image}
+                      alt={title}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </td>
+                  <td>{title}</td>
+                  <td>${price.toFixed(2)}</td>
+                  <td>{quantity}</td>
+                  <td>${(price * quantity).toFixed(2)}</td>
+                  <td>
+                    <button
+                      onClick={() => onRemoveItem(id)}
+                      className="remove-btn"
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
-          {}
+
+          {/* Display the total and action buttons */}
           <div className="cart-summary">
             <h2>Total: ${calculateTotal()}</h2>
-            <button onClick={onClearCart} className="clear-cart-btn">
-              Clear Cart
-            </button>
+            <div className="cart-buttons">
+              <button onClick={onClearCart} className="clear-cart-btn">
+                Clear Cart
+              </button>
+              <button
+                onClick={onProceedToCheckout}
+                className="proceed-checkout-btn"
+              >
+                Proceed to Checkout
+              </button>
+            </div>
           </div>
         </div>
       )}

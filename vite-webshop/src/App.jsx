@@ -45,7 +45,7 @@ function App() {
     <div className="app">
       <div className="header">
         <div className="header-left">
-          <h2>hello {user?.email}</h2>
+          <h2>Hello {user?.email}!</h2>
         </div>
         <div className="header-right">
           <button
@@ -54,9 +54,6 @@ function App() {
           >
             {showCart ? "Hide Cart" : "Cart"}
           </button>
-          <div className="cart-icon" data-count={cart.length}>
-            <img src="cart-icon.png" alt="Cart" />
-          </div>
           <button className="header-menu" onClick={() => auth.signOut()}>
             Sign Out
           </button>
@@ -65,22 +62,15 @@ function App() {
 
       {!isCheckout ? (
         <>
-          <Products onAddToCart={addToCart} />
           {showCart && (
             <ShoppingCart
               cart={cart}
               onRemoveItem={removeFromCart}
               onClearCart={clearCart}
+              onProceedToCheckout={() => setIsCheckout(true)}
             />
           )}
-          {cart.length > 0 && (
-            <button
-              onClick={() => setIsCheckout(true)}
-              className="checkout-btn"
-            >
-              Proceed to Checkout
-            </button>
-          )}
+          <Products onAddToCart={addToCart} />
         </>
       ) : (
         <Checkout
