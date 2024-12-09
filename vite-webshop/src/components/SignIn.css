@@ -1,4 +1,4 @@
-body {
+.sign-in-page {
   font-family: Arial, sans-serif;
   background-color: #e0f7fa; /* Light blue-green background */
   margin: 0;
@@ -9,22 +9,19 @@ body {
   height: 100vh;
 }
 
-/* Center the content */
-form,
-h2,
-button {
+.sign-in-page form,
+.sign-in-page h2,
+.sign-in-page button {
   text-align: center;
 }
 
-/* Heading styles */
-h2 {
+.sign-in-page h2 {
   color: #00695c; /* Deep teal */
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-/* Form container */
-form {
+.sign-in-page form {
   background-color: #ffffff; /* White background */
   padding: 20px;
   border-radius: 8px;
@@ -35,8 +32,7 @@ form {
   align-items: center;
 }
 
-/* Input styles */
-form input {
+.sign-in-page form input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
@@ -45,20 +41,7 @@ form input {
   font-size: 16px;
 }
 
-/* Button styles */
-form button {
-  background-color: #00796b; /* Dark teal */
-  color: #ffffff; /* White text */
-  border: none;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 10px; /* Add spacing between buttons */
-}
-
-form button {
+.sign-in-page form button {
   color: #ffffff; /* White text */
   border: none;
   padding: 10px;
@@ -70,19 +53,19 @@ form button {
 }
 
 /* Specific styles for the sign-in button */
-.sign-in-button {
+.sign-in-page .sign-in-button {
   background-color: #00796b; /* Dark teal */
 }
 
-.sign-in-button:hover {
+.sign-in-page .sign-in-button:hover {
   background-color: #004d40; /* Even darker teal */
 }
 
 /* Specific styles for the sign-up button */
-.sign-up-button {
+.sign-in-page .sign-up-button {
   background-color: #004e89; /* Dark blue */
 }
 
-.sign-up-button:hover {
+.sign-in-page .sign-up-button:hover {
   background-color: #003060; /* Even darker blue */
 }

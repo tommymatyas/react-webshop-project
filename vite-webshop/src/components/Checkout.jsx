@@ -130,7 +130,7 @@ const Checkout = ({
           onClick={() => setIsCheckout(false)}
           className="back-to-cart-btn"
         >
-          Back to Home Page
+          Back to Products
         </button>
         <button onClick={handlePlaceOrder} className="place-order-btn">
           Place Order
